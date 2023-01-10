@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var scanTextBtn: MaterialButton
     private lateinit var imageVi: ImageView
     private lateinit var recognizedTextEd: EditText
+    private lateinit var saveBtn:MaterialButton
 
     private companion object {
         private const val CAMERA_REQUEST_CODE = 100
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         scanTextBtn = findViewById(R.id.scanTextBtn)
         imageVi = findViewById(R.id.imageVi)
         recognizedTextEd = findViewById(R.id.recognizedTextEd)
+        saveBtn= findViewById(R.id.saveBtn)
 
 
         //initializing camera and gallery permissions

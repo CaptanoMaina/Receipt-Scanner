@@ -3,4 +3,5 @@
     <string name="recongize_text">Recongize Text</string>
     <string name="recognize_text">Recognize Text</string>
     <string name="capture_image">Capture Image</string>
+    <string name="save_record">Save Record</string>
 </resources>

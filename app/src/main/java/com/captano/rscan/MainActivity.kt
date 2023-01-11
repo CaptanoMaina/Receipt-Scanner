@@ -17,11 +17,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.captano.rscan.Room.ScanDatabase
+import com.captano.rscan.Room.ScanModel
 import com.google.android.material.button.MaterialButton
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var scanTextBtn: MaterialButton
     private lateinit var imageVi: ImageView
     private lateinit var recognizedTextEd: EditText
-    private lateinit var saveBtn:MaterialButton
+    private lateinit var saveBtn: MaterialButton
 
     private companion object {
         private const val CAMERA_REQUEST_CODE = 100
@@ -56,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         scanTextBtn = findViewById(R.id.scanTextBtn)
         imageVi = findViewById(R.id.imageVi)
         recognizedTextEd = findViewById(R.id.recognizedTextEd)
-        saveBtn= findViewById(R.id.saveBtn)
+        saveBtn = findViewById(R.id.saveBtn)
 
 
         //initializing camera and gallery permissions
@@ -79,7 +85,9 @@ class MainActivity : AppCompatActivity() {
         imageBtn.setOnClickListener {
             showInputImageDialog()
         }
-
+        saveBtn.setOnClickListener {
+            saveToDatabase()
+        }
         //onClickListener to scan for text in image
         scanTextBtn.setOnClickListener {
             if (imageUri == null) {
@@ -284,6 +292,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveToDatabase() {
+        val text = recognizedTextEd.text.toString()
+        if (text.isNotBlank()) {
+            val scanModel = ScanModel(0, text, System.currentTimeMillis())
+            val database = ScanDatabase(this)
+            GlobalScope.launch(Dispatchers.IO) {
+                database.scanDAO().insertScan(scanModel)
+                withContext(Dispatchers.Main) {
+                    showToast("Saved to the database!")
+                }
+            }
+        }
     }
 
 

@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -17,6 +19,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.captano.rscan.Room.ScanDatabase
 import com.captano.rscan.Room.ScanModel
 import com.google.android.material.button.MaterialButton
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recognizedTextEd: EditText
     private lateinit var saveBtn: MaterialButton
 
+
     private companion object {
         private const val CAMERA_REQUEST_CODE = 100
         private const val STORAGE_REQUEST_CODE = 101
@@ -53,9 +58,36 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var textRecognizer: TextRecognizer
 
+    lateinit var androidViewModel: RecognizedTextViewModel
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.menu_history -> {
+                startHistoryActivity()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun startHistoryActivity() {
+        startActivity(Intent(this, RecognizedTextsActivity::class.java))
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        setUpViewModel()
 
         //initializing UI views
         imageBtn = findViewById(R.id.imageBtn)
@@ -88,6 +120,7 @@ class MainActivity : AppCompatActivity() {
         saveBtn.setOnClickListener {
             saveToDatabase()
         }
+
         //onClickListener to scan for text in image
         scanTextBtn.setOnClickListener {
             if (imageUri == null) {
@@ -103,6 +136,14 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    fun setUpViewModel() {
+        androidViewModel = ViewModelProvider(this).get(RecognizedTextViewModel::class.java)
+        androidViewModel.allTextLiveData.observe(this, Observer { listRetrievedFromDatabase ->
+            showToast("Number of list is " + listRetrievedFromDatabase?.size)
+        })
+    }
+
 
     private fun recognizedTextFromImage() {
         progressDialog.setMessage("Preparing Image For Processing..")
@@ -294,17 +335,20 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+
     private fun saveToDatabase() {
         val text = recognizedTextEd.text.toString()
         if (text.isNotBlank()) {
             val scanModel = ScanModel(0, text, System.currentTimeMillis())
             val database = ScanDatabase(this)
             GlobalScope.launch(Dispatchers.IO) {
-                database.scanDAO().insertScan(scanModel)
+               database.scanDAO().insertScan(scanModel)
                 withContext(Dispatchers.Main) {
-                    showToast("Saved to the database!")
+                   showToast("Saved to the database!")
                 }
             }
+
+            androidViewModel.InsertPicToDB(this, scanModel)
         }
     }
 

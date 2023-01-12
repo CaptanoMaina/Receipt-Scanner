@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface ScanDAO {
     @Query("SELECT * FROM scan_table ORDER BY time DESC")
-    fun getAllScans(): LiveData<List<ScanModel>>
+    fun getAllScans(): LiveData<List<ScanModel>?>
 
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

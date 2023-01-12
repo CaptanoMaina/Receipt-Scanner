@@ -340,15 +340,9 @@ class MainActivity : AppCompatActivity() {
         val text = recognizedTextEd.text.toString()
         if (text.isNotBlank()) {
             val scanModel = ScanModel(0, text, System.currentTimeMillis())
-            val database = ScanDatabase(this)
-            GlobalScope.launch(Dispatchers.IO) {
-               database.scanDAO().insertScan(scanModel)
-                withContext(Dispatchers.Main) {
-                   showToast("Saved to the database!")
-                }
-            }
 
             androidViewModel.InsertPicToDB(this, scanModel)
+
         }
     }
 

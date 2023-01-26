@@ -19,17 +19,17 @@ To get this application up and running in your mobile device, download this [apk
 
 After launching the applicaation, give the permissions for the app to access your file manager and camera.
 
-![Alt text](https://github.com/CaptanoMaina/Receipt-Scanner/blob/master/image%20source/perm1.jpeg?raw=true)
+![image ](https://github.com/CaptanoMaina/Receipt-Scanner/blob/master/image%20source/perm1.jpeg?raw=true)<img src="https://github.com/CaptanoMaina/Receipt-Scanner/blob/master/image%20source/perm1.jpeg?raw=true" width = "50">
 
 ![Alt text](image%20source/perm2.jpeg)
 
 Select an image from the gallery or launch the camera to take a picture.
 
-![](image%20source/gallery.jpeg =100x100)
+![Alt text](image%20source/gallery.jpeg)
 
 Once the image is selected, recognize the text by pressing the recognize text button.
 
-![<img src = "image%20source/recog.jpeg" width ="70"/>](image%20source/recog.jpeg)
+![Alt text](image%20source/recog.jpeg)
 
 If you are satisfied with the results of the scan click on the Save Record button.
 

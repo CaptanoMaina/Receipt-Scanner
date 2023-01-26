@@ -20,7 +20,7 @@ To get this application up and running in your mobile device, download this [apk
 After launching the applicaation, give the permissions for the app to access your file manager and camera.
 
 ```
-![Alt text](image%20source/perm1.jpeg)
+![Alt text](https://github.com/CaptanoMaina/Receipt-Scanner/blob/master/image%20source/perm1.jpeg?raw=true)
 ```
 
 ```

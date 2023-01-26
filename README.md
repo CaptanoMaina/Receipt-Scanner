@@ -21,9 +21,7 @@ After launching the applicaation, give the permissions for the app to access you
 
 ![Alt text](https://github.com/CaptanoMaina/Receipt-Scanner/blob/master/image%20source/perm1.jpeg?raw=true)
 
-```
 ![Alt text](image%20source/perm2.jpeg)
-```
 
 Select an image from the gallery or launch the camera to take a picture.
 

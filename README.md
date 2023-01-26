@@ -25,11 +25,11 @@ After launching the applicaation, give the permissions for the app to access you
 
 Select an image from the gallery or launch the camera to take a picture.
 
-![Alt text](image%20source/gallery.jpeg){width = "150px"}
+![Alt text](image%20source/gallery.jpeg width = "150px")
 
 Once the image is selected, recognize the text by pressing the recognize text button.
 
-![Alt text](image%20source/recog.jpeg)
+![<img src = "image%20source/recog.jpeg" width ="150"/>](image%20source/recog.jpeg)
 
 If you are satisfied with the results of the scan click on the Save Record button.
 

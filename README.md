@@ -25,23 +25,17 @@ After launching the applicaation, give the permissions for the app to access you
 
 Select an image from the gallery or launch the camera to take a picture.
 
-```
 ![Alt text](image%20source/gallery.jpeg)
-```
 
 Once the image is selected, recognize the text by pressing the recognize text button.
 
-```
 ![Alt text](image%20source/recog.jpeg)
-```
 
 If you are satisfied with the results of the scan click on save to database.
 
 To view previously saved details, click on the history icon at the top right and the saved data will be arraanged in descending order of the dates it was saved.
 
-```
 ![Alt text](image%20source/list.jpeg)
-```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 

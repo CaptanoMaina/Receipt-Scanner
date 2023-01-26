@@ -31,7 +31,7 @@ Once the image is selected, recognize the text by pressing the recognize text bu
 
 ![Alt text](image%20source/recog.jpeg)
 
-If you are satisfied with the results of the scan click on save to database.
+If you are satisfied with the results of the scan click on the Save Record button.
 
 To view previously saved details, click on the history icon at the top right and the saved data will be arraanged in descending order of the dates it was saved.
 
